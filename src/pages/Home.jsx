@@ -7,11 +7,12 @@ import BookList from "./BookList";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
+  const [oneriler, setOneriler] = useState([]);
 
   return (
     <div className="bg-blue-400 ">
-      <Main book={books} setBooks={setBooks} />
-      <BookList books={books} setBook={setBooks} />
+      <Main book={books} setBooks={setBooks} oneriler={oneriler} setOneriler={setOneriler} />
+      <BookList books={books} setBook={setBooks} oneriler={oneriler} />
     </div>
   );
 };

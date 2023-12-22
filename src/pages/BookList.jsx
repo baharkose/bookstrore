@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import myImage from "../img/books.jpg";
 import AdPage from "./AdPage";
 
-const BookList = ({ books }) => {
+const BookList = ({ books  }) => {
+
+  
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
@@ -32,52 +34,30 @@ const BookList = ({ books }) => {
           {currentItems.map((book) => {
             const { id, volumeInfo } = book; // Destructure here, outside of return statement
             return (
-              // <Card
-              //   className="mb-4 d-flex justify-content-center card"
-              //   style={{ width: "18rem" }}
-              //   key={id}
-              // >
-              //   <Card.Img
-              //     style={{ height: "16rem", width: "16rem", objectFit: "cover" }}
-              //     variant="top"
-              //     src={volumeInfo?.imageLinks?.thumbnail || myImage}
-              //   />
-              //   <Card.Body>
-              //     <Card.Title>{volumeInfo?.title}</Card.Title>
-              //     <Card.Text>{volumeInfo?.authors}</Card.Text>
-              //     <Card.Text>
-              //       Some quick example text to build on the card title and make up
-              //       the bulk of the card's content.
-              //     </Card.Text>
-              //     <Card.Text>
-              //       <span className="fw-bold">Fiyat: </span>
-              //       {Math.floor(Math.random() * (25 - 5 + 1) + 5) * 10}{" "}
-              //       <span>₺</span>
-              //     </Card.Text>
-              //     <Button
-              //       variant="primary"
-              //       onClick={() => navigate(`/book/${id}`)}
-              //     >
-              //       Detayları Görüntüle
-              //     </Button>
-              //   </Card.Body>
-              // </Card>
-              <div className="card w-80 h-80 bg-base-50 shadow-xl" key={id}>
+              <div
+                className="card w-60 h-80 bg-base-50 shadow-xl"
+                key={id}
+                style={{ maxHeight: "400px", lineHeight: "1px" }}
+              >
                 <figure className="m-auto">
                   <img
                     src={volumeInfo?.imageLinks?.thumbnail || myImage}
                     alt={volumeInfo?.title}
                     style={{
-                      height: "16rem",
+                      height: "12rem",
                       width: "100%",
                       objectFit: "cover",
                     }}
                   />
                 </figure>
-                <div className="card-body">
-                  <h5 className="card-title">{volumeInfo?.title}</h5>
-                  <p>{volumeInfo?.authors}</p>
-                  <p className="line-clamp-4">{volumeInfo?.description}</p>
+                <div className="card-body text-sm leading-none m-auto text-center" >
+                  <h5 className="card-title text-sm">{volumeInfo?.title}</h5>
+                  <p >
+                    {volumeInfo?.authors
+                      ? volumeInfo.authors[0]
+                      : "Yazar Bilinmiyor"}
+                  </p>
+                  <p className="">{volumeInfo?.publisher}</p>
                   <p>
                     <span className="fw-bold">Fiyat: </span>
                     {Math.floor(Math.random() * (25 - 5 + 1) + 5) * 10}{" "}
