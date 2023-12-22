@@ -4,12 +4,13 @@ import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 import myImage from "../img/books.jpg";
 import AdPage from "./AdPage";
+import ShowModal from "../components/ShowModal";
 
-const BookList = ({ books  }) => {
-
-  
+const BookList = ({ books }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
+  //- modalShow
+  const [showModal, setShowModal] = useState(false);
 
   const indexOfLastItem = currentPage * itemsPerPage; //- her sayfanın son elemanının index bilgisini getirir.
   const indexOfFirstItem = indexOfLastItem - itemsPerPage; //- her sayfanın ilk elemanının index numarasını verir
@@ -35,9 +36,10 @@ const BookList = ({ books  }) => {
             const { id, volumeInfo } = book; // Destructure here, outside of return statement
             return (
               <div
-                className="card w-60 h-80 bg-base-50 shadow-xl"
+                className="card w-60 h-80 bg-base-50 shadow-xl cursor-pointer"
                 key={id}
                 style={{ maxHeight: "400px", lineHeight: "1px" }}
+                onClick={() => navigate(`/book/${id}`)}
               >
                 <figure className="m-auto">
                   <img
@@ -50,9 +52,9 @@ const BookList = ({ books  }) => {
                     }}
                   />
                 </figure>
-                <div className="card-body text-sm leading-none m-auto text-center" >
+                <div className="card-body text-sm leading-none m-auto text-center">
                   <h5 className="card-title text-sm">{volumeInfo?.title}</h5>
-                  <p >
+                  <p>
                     {volumeInfo?.authors
                       ? volumeInfo.authors[0]
                       : "Yazar Bilinmiyor"}
@@ -66,10 +68,14 @@ const BookList = ({ books  }) => {
                   <div className="card-actions m-auto">
                     <button
                       className="btn btn-primary"
-                      onClick={() => navigate(`/book/${id}`)}
+                      onClick={() => setShowModal(true)}
                     >
-                      Detayları Görüntüle
+                      Sepete Ekle
                     </button>
+                    <ShowModal
+                      showModal={showModal}
+                      setShowModal={setShowModal}
+                    />
                   </div>
                 </div>
               </div>

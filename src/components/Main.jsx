@@ -10,6 +10,7 @@ const Main = ({ books, setBooks }) => {
   const [oneriler, setOneriler] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [showOneri, setShowOneri] = useState(false)
 
   const getBooks = async () => {
     const apiKey = process.env.REACT_APP_API_KEY;
@@ -48,6 +49,7 @@ const Main = ({ books, setBooks }) => {
     setLoading(true); // Start loading here
     getBooks();
     setLoading(false);
+    setShowOneri(false)
   };
 
   const handleChange = (e) => {
@@ -80,8 +82,8 @@ const Main = ({ books, setBooks }) => {
             }}
           />
           <ul
-            className={`absolute cursor-pointer z-20 bg-slate-200 rounded  text-left ${
-              oneriler.length !== 0 ? "block" : "hidden"
+            className={`absolute cursor-pointer z-20 max-h-[400px] overflow-auto bg-slate-200 rounded  text-left ${
+              oneriler.length !== 0 || showOneri ? "block" : "hidden"
             }`}
           >
             {oneriler.map((book, index) => {
@@ -92,7 +94,8 @@ const Main = ({ books, setBooks }) => {
               const publisherText = publisher || "Yayınevi Bilinmiyor";
               return (
                 <li key={index} 
-                onClick={() => navigate(`/book/${book.id}`)}>
+                onClick={() => {navigate(`/book/${book.id}`);
+                                setShowOneri(false)}}>
                   <div>
                     <strong>{title}</strong> - {authorsText} - {publisherText}
                   </div>

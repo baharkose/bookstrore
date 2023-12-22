@@ -11,7 +11,7 @@ import FooterBook from "./components/FooterBook";
 import NavbarBook from "./components/NavbarBook";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   return (
     <div className="App">
       <BrowserRouter>
