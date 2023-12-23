@@ -6,11 +6,12 @@ import ShowModal from "../components/ShowModal";
 import { useContext } from "react";
 import { HesaplaContext } from "../context/HesaplaContext";
 
-const BookList = ({ books}) => {
+const BookList = ({ books }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
-  const {odemeTutar, setOdemeTutar ,sepet, setSepet} =  useContext(HesaplaContext)
+  const { odemeTutar, setOdemeTutar, sepet, setSepet } =
+    useContext(HesaplaContext);
 
   //- modalShow
   // Her kitap için ayrı bir modal durumu tutmak için bir state nesnesi
@@ -93,12 +94,16 @@ const BookList = ({ books}) => {
             const { id, volumeInfo } = book;
             return (
               <div
-                className="card w-60 h-80 bg-base-50 shadow-xl cursor-pointer"
+                className="card w-60 h-90 bg-base-50 shadow-xl cursor-pointer "
                 key={id}
-                style={{ maxHeight: "400px", lineHeight: "1px" }}
+                style={{
+                  maxHeight: "400px",
+                  lineHeight: "1px",
+                  minHeight: "400px",
+                }}
                 onClick={(e) => handleCardClick(id, e)}
               >
-                <figure className="m-auto">
+                <figure className="m-1">
                   <img
                     src={volumeInfo?.imageLinks?.thumbnail || myImage}
                     alt={volumeInfo?.title}
@@ -110,7 +115,9 @@ const BookList = ({ books}) => {
                   />
                 </figure>
                 <div className="card-body text-sm leading-none m-auto text-center">
-                  <h5 className="card-title text-sm">{volumeInfo?.title}</h5>
+                  <h5 className="card-title text-sm line-clamp-1">
+                    {volumeInfo?.title}
+                  </h5>
                   <p>
                     {volumeInfo?.authors
                       ? volumeInfo.authors[0]
@@ -122,31 +129,35 @@ const BookList = ({ books}) => {
                     {Math.floor(Math.random() * (25 - 5 + 1) + 5) * 10}
                     <span>₺</span>
                   </p>
-                  <div className="card-actions m-auto">
+                  <div className="card-actions">
                     <button
-                      className="bg-slate-600 rounded-md p-3 text-white"
+                      className="bg-gray-400 w-[100%] rounded-md w-[36pxpx] h-[36px] px-2 text-white"
                       onClick={() => {
                         handleBasket(book);
                       }}
                     >
-                      Sepete Ekle
+                      Add To Cart
                     </button>
-                    {showModals[id] && (
-                      <ShowModal
-                        showModal={showModals[book.id]}
-                        setShowModal={() => toggleModal(book.id)}
-                        sepet={sepet}
-                        odemeTutar={odemeTutar}
-                        setOdemeTutar={setOdemeTutar}
-                      />
-                    )}
                   </div>
                 </div>
               </div>
             );
           })}
         </div>
-        <nav>
+
+        {currentItems.map(
+          (book) =>
+            showModals[book.id] && (
+              <ShowModal
+                key={book.id}
+                showModal={showModals[book.id]}
+                setShowModal={() => toggleModal(book.id)}
+                sepet={sepet}
+                // Diğer props'larınız...
+              />
+            )
+        )}
+        <nav className="mt-5">
           <ul className="pagination flex justify-center items-center">
             {pageNumbers.map((number) => (
               <li key={number} className="page-item">

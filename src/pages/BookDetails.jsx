@@ -5,15 +5,14 @@ import myImage from "../img/books.jpg";
 import ShowModal from "../components/ShowModal";
 import { HesaplaContext } from "../context/HesaplaContext";
 
-
-
 const BookDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [book, setBook] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const { odemeTutar, setOdemeTutar, setSepet, sepet } = useContext(HesaplaContext);
+  const { odemeTutar, setOdemeTutar, setSepet, sepet } =
+    useContext(HesaplaContext);
 
   useEffect(() => {
     const getBookDetails = async () => {
@@ -43,26 +42,36 @@ const BookDetails = () => {
 
   const { volumeInfo } = book;
   return (
-    <div className="container mx-auto p-4 w-10/12 bg-green-100 font-montserrat">
-      <h1 className="text-2xl font-bold mb-4 text-green-700">Book Detail</h1>
-      <div className="flex flex-wrap -mx-2">
-        <div className="w-full sm:w-1/2 p-2">
+    <div className=" mx-auto p-4 w-10/12  ">
+      <h1 className="text-2xl font-bold ">Book Detail</h1>
+      <div className="flex flex-wrap">
+        <div className="w-full sm:w-1/2">
           <div className="bg-white shadow-lg rounded-lg overflow-hidden">
             <img
-              className="w-full h-64 object-cover object-center"
+              className="w-[100%] h-[24rem] p-2 object-cover object-center"
               src={volumeInfo?.imageLinks?.thumbnail || myImage}
               alt="Book cover"
             />
             <div className="p-4">
-              <h2 className="text-xl font-bold mb-2 text-green-800">{volumeInfo?.title}</h2>
-              <p className="text-gray-700">{volumeInfo?.authors?.join(", ")}</p>
-              <p className="text-green-700">
+              <p className="text-base mb-2 ">
+                <span className="font-bold">Book Name:</span>{" "}
+                {volumeInfo?.title}
+              </p>
+              <p className="text-gray-700">
+                <span className="font-bold">Author: </span>
+                {volumeInfo?.authors?.join(", ")}
+              </p>
+              <p className="">
+                <span className="font-bold">Publisher: </span>
+                {volumeInfo?.publisher}
+              </p>
+              <p>
                 <span className="font-bold">Price: </span>{" "}
                 {Math.floor(Math.random() * (25 - 5 + 1) + 5) * 10}
                 <span>₺</span>
               </p>
               <button
-                className="mt-4 bg-white text-green-600 border border-green-600 hover:bg-green-600 hover:text-white active:bg-green-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg focus:outline-none ease-linear transition-all duration-150"
+                className="bg-gray-400 w-[100%] rounded-md w-[36pxpx] h-[36px] px-2 text-white"
                 onClick={() => setShowModal(true)}
               >
                 Add to Cart
@@ -77,8 +86,9 @@ const BookDetails = () => {
             </div>
           </div>
         </div>
-        <div className="w-full sm:w-1/2 p-2">
+        <div className="w-full sm:w-1/2 pl-2">
           <div className="bg-white shadow-lg rounded-lg p-4">
+            <p className="font-bold">Açıklama:</p>
             {volumeInfo?.description ? (
               <div
                 dangerouslySetInnerHTML={{ __html: volumeInfo.description }}

@@ -63,3 +63,22 @@ a {
   font-weight: bold;
   color: black !important;
 }
+
+.card-body {
+    position: relative;
+    text-align: center;
+    
+}
+.card-actions {
+    text-align: center;
+    bottom: 4px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+   
+}
+
+.card-actions button {
+    width: 100%;
+    
+}

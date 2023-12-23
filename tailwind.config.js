@@ -3,8 +3,21 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
 
   theme: {
-    extend: {},
+    extend: {
+      // Burada genişletmelerinizi ekleyin
+    },
   },
-  plugins: [],
+  plugins: [
+    // Scrollbar gizleme için özel plugin
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.scrollbar-hide': {
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+        },
+      };
+      addUtilities(newUtilities);
+    }
+  ],
 };
-

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { HesaplaContext } from "../context/HesaplaContext";
 import { MdDelete } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const ShowModal = ({ showModal, setShowModal, sepet }) => {
   const { odemeTutar, setOdemeTutar, setSepet } = useContext(HesaplaContext);
   console.log(sepet);
+  const navigate = useNavigate()
 
   const miktarGuncelle = (id, yeniMiktar) => {
     const guncellenmisSepet = sepet.map((item) => {
@@ -156,11 +158,14 @@ const ShowModal = ({ showModal, setShowModal, sepet }) => {
                     Close
                   </button>
                   <button
-                    className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    className="bg-gray-400 rounded-md w-[36pxpx] h-[36px] px-2 text-white"
                     type="button"
-                    onClick={() => setShowModal(false)}
+                    onClick={() => {setShowModal(false);
+                    navigate("/buy")
+                    }}
+                    
                   >
-                    Save Changes
+                    Go To Cart
                   </button>
                 </div>
               </div>
