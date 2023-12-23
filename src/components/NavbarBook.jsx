@@ -1,10 +1,12 @@
-import { useState } from "react"; // import state
+import { useContext, useState } from "react"; // import state
 import { Link } from "react-router-dom";
+import { HesaplaContext } from "../context/HesaplaContext";
 
 
 export default function NavbarBook() {
   const [isNavOpen, setIsNavOpen] = useState(false); // initiate isNavOpen state with false
   const [isOpen, setIsOpen] = useState(false);
+  const {sepet} = useContext(HesaplaContext)
 
   return (
     <div className="flex items-center justify-between border-b border-gray-400 py-8 px-5">
@@ -72,7 +74,7 @@ export default function NavbarBook() {
                     </svg>
                     <span class="absolute inset-0 object-right-top -mr-6">
                       <div class="inline-flex items-center px-1.5 py-0.5 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-red-500 text-white">
-                        6
+                      {sepet.length}
                       </div>
                     </span>
                   </button>
@@ -114,7 +116,7 @@ export default function NavbarBook() {
                 </svg>
                 <span class="absolute inset-0 object-right-top -mr-6 top-[-12px]">
                   <div class="inline-flex items-center px-1.5 py-0.5 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-red-500 text-white">
-                    6
+                  {sepet.length}
                   </div>
                 </span>
               </button>
