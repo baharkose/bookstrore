@@ -124,9 +124,9 @@ const Buy = () => {
                 {
                   <td
                     colSpan="5"
-                    className="px-1 py-1 border-b px-1 py-2 border-gray-200 bg-white text-sm"
+                    className="px-1 py-1 border-b px-1 py-2 border-gray-200 text-center bg-white text-sm"
                   >
-                    <span>Ödenecek Tutar: {odemeTutar} </span>
+                    <span className="text-red-500 text-base font-bold">Ödenecek Tutar: {odemeTutar} </span>
                   </td>
                 }
               </tr>

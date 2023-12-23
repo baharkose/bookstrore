@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const ShowModal = ({ showModal, setShowModal, sepet }) => {
   const { odemeTutar, setOdemeTutar, setSepet } = useContext(HesaplaContext);
   console.log(sepet);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const miktarGuncelle = (id, yeniMiktar) => {
     const guncellenmisSepet = sepet.map((item) => {
@@ -33,12 +33,17 @@ const ShowModal = ({ showModal, setShowModal, sepet }) => {
     }
   }, [sepet, setOdemeTutar]);
 
+  const sepetSil = (id, miktar) => {
+    const guncellenmisSepet = sepet.filter((item) => item.id !== id);
+    setSepet(guncellenmisSepet);
+  };
+
   return (
     <div>
       {showModal ? (
         <>
-          <div className="w-full sm:w-3/4 md:w-1/2 justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto mx-auto max-w-3xl">
+          <div className=" justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="relative w-auto mx-auto max-w-3xl sm:w-3/4 md:w-1/2">
               {/*content*/}
               <div className="border-0 rounded-sm shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
@@ -115,21 +120,24 @@ const ShowModal = ({ showModal, setShowModal, sepet }) => {
                                 </button>
                               </div>
                             </td>
-                            <td className="px-1 py-1 border-b border-gray-200 bg-white text-sm">
+                            <td className="pt-3 border-b border-gray-200 bg-white text-sm">
                               <p className="text-gray-900 whitespace-no-wrap">
                                 <span>₺</span>
                                 {fiyat}
                               </p>
                             </td>
-                            <td className="px-1 py-1 border-b border-gray-200 bg-white text-sm">
+                            <td className="pt-3 border-b border-gray-200 bg-white text-sm">
                               <p className="text-gray-900 whitespace-no-wrap">
                                 <span>₺</span>
                                 {miktar * fiyat}
                               </p>
                             </td>
-                            <td className="px-1 py-1 border-b border-gray-200 bg-white text-sm">
-                              <button className="text-red-500 hover:text-red-700">
-                              <MdDelete />
+                            <td className="border-b border-gray-200 bg-white text-sm">
+                              <button
+                                className="text-red-500 hover:text-red-700 text-xl"
+                                onClick={() => sepetSil(id)}
+                              >
+                                <MdDelete />
                               </button>
                             </td>
                           </tr>
@@ -140,7 +148,7 @@ const ShowModal = ({ showModal, setShowModal, sepet }) => {
                               colSpan="5"
                               className="px-1 py-1 border-b border-gray-200 bg-white text-sm"
                             >
-                              <span>Ödenecek Tutar: {odemeTutar} </span>
+                              <span className="text-red-500 text-base font-bold">Ödenecek Tutar: {odemeTutar} </span>
                             </td>
                           }
                         </tr>
@@ -160,10 +168,10 @@ const ShowModal = ({ showModal, setShowModal, sepet }) => {
                   <button
                     className="bg-gray-400 rounded-md w-[36pxpx] h-[36px] px-2 text-white"
                     type="button"
-                    onClick={() => {setShowModal(false);
-                    navigate("/buy")
+                    onClick={() => {
+                      setShowModal(false);
+                      navigate("/buy");
                     }}
-                    
                   >
                     Go To Cart
                   </button>
