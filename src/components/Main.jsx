@@ -13,8 +13,7 @@ const Main = ({ books, setBooks, sepet, setSepet }) => {
   const navigate = useNavigate();
   const [showOneri, setShowOneri] = useState(false);
 
-  const {odemeTutar, setOdemeTutar} =  useContext(HesaplaContext)
- 
+  const { odemeTutar, setOdemeTutar } = useContext(HesaplaContext);
 
   const getBooks = async () => {
     const apiKey = process.env.REACT_APP_API_KEY;
@@ -41,24 +40,22 @@ const Main = ({ books, setBooks, sepet, setSepet }) => {
 
       const tekFilteredBooks = filteredBooks.find((item) => item);
       console.log(tekFilteredBooks);
-      
 
       console.log(response.data);
       setOneriler(filteredBooks);
       setBooks(filteredBooks); //- Eğer hiç kitap yoksa, boş liste ataması yap
     } catch (error) {
       console.error("Bir hata oluştu!", error);
-    } 
+    }
   };
 
   const handleSubmit = (e) => {
-    setLoading(true); 
+    setLoading(true);
     getBooks();
     setShowOneri(false);
     setOneriler([]);
-    setBooks([])
+    setBooks([]);
     setInput("");
-    
   };
 
   const handleChange = (e) => {
@@ -71,7 +68,6 @@ const Main = ({ books, setBooks, sepet, setSepet }) => {
       setShowOneri(false);
     }
   };
-
 
   if (loading) {
     return (
@@ -95,7 +91,7 @@ const Main = ({ books, setBooks, sepet, setSepet }) => {
             }}
           />
           <ul
-            className={`absolute cursor-pointer z-2 w-[500px] overflow-auto bg-[#f9f9f9] rounded  text-left ${
+            className={`absolute cursor-pointer z-2 w-[500px] overflow-auto bg-[#f9f9f9] rounded border-gray-400 text-left ${
               showOneri ? "block" : "hidden"
             }`}
           >
@@ -121,18 +117,16 @@ const Main = ({ books, setBooks, sepet, setSepet }) => {
             })}
           </ul>
           <button
-          className="bg-gray-300 rounded w-12 h-[40px] text-blue-50"
-          onClick={() => {
-            handleSubmit();
-            setShowOneri(false);
-          }}
-          type="button"
-        >
-          Ara
-        </button>
+            className="bg-gray-300 rounded w-12 h-[40px] text-blue-50"
+            onClick={() => {
+              handleSubmit();
+              setShowOneri(false);
+            }}
+            type="button"
+          >
+            Ara
+          </button>
         </div>
-
-      
       </div>
     );
   }
