@@ -54,7 +54,7 @@ export default function NavbarBook() {
                 <Link to="/contact">Contact</Link>
               </li>
               <li className="border-b border-gray-400 my-8 uppercase">
-                <Link to="/basket">
+                <Link to="/buy">
                   <button
                     class="py-4 px-1 relative border-2 border-transparent text-gray-800 rounded-full hover:text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out"
                     aria-label="Cart"
@@ -84,7 +84,7 @@ export default function NavbarBook() {
 
         <ul className="DESKTOP-MENU hidden space-x-8 lg:flex">
           <li>
-            <Link to="/about">Home</Link>
+            <Link to="/main">Main</Link>
           </li>
           <li>
             <Link to="/about">About</Link>
@@ -96,7 +96,7 @@ export default function NavbarBook() {
             <Link to="/contact">Contact</Link>
           </li>
           <li>
-            <Link to="/basket">
+            <Link to="/Buy">
               <button
                 class="relative border-2 border-transparent text-gray-800 rounded-full hover:text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out"
                 aria-label="Cart"

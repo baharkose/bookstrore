@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "../img/spinner.gif";
 import NotFound from "../pages/NotFound";
 import { Navigate, useNavigate } from "react-router-dom";
 import AdPage from "../pages/AdPage";
+import { HesaplaContext } from "../context/HesaplaContext";
 
-const Main = ({ books, setBooks }) => {
+const Main = ({ books, setBooks, sepet, setSepet }) => {
   const [input, setInput] = useState("");
   const [oneriler, setOneriler] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [showOneri, setShowOneri] = useState(false)
+  const [showOneri, setShowOneri] = useState(false);
+
+  const {odemeTutar, setOdemeTutar} =  useContext(HesaplaContext)
+ 
 
   const getBooks = async () => {
     const apiKey = process.env.REACT_APP_API_KEY;
@@ -18,6 +22,7 @@ const Main = ({ books, setBooks }) => {
     const url = `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${apiKey}&maxResults=40`;
 
     try {
+      setLoading(false);
       const response = await axios.get(url);
 
       const filteredBooks = response.data.items.filter(
@@ -36,30 +41,37 @@ const Main = ({ books, setBooks }) => {
 
       const tekFilteredBooks = filteredBooks.find((item) => item);
       console.log(tekFilteredBooks);
+      
 
       console.log(response.data);
       setOneriler(filteredBooks);
       setBooks(filteredBooks); //- Eğer hiç kitap yoksa, boş liste ataması yap
     } catch (error) {
       console.error("Bir hata oluştu!", error);
-    }
+    } 
   };
 
   const handleSubmit = (e) => {
-    setLoading(true); // Start loading here
+    setLoading(true); 
     getBooks();
-    setLoading(false);
-    setShowOneri(false)
+    setShowOneri(false);
+    setOneriler([]);
+    setBooks([])
+    setInput("");
+    
   };
 
   const handleChange = (e) => {
     if (e.target.value) {
       getBooks();
+      setShowOneri(true);
     } else {
       setOneriler([]);
       setBooks([]);
+      setShowOneri(false);
     }
   };
+
 
   if (loading) {
     return (
@@ -74,7 +86,7 @@ const Main = ({ books, setBooks }) => {
           <input
             type="text"
             value={input}
-            className="w-[500px] h-[36px] rounded"
+            className="w-[500px] h-[36px] rounded p-2"
             placeholder="kitap adı, yazar veya yayınevi ara"
             onChange={(e) => {
               setInput(e.target.value);
@@ -83,7 +95,7 @@ const Main = ({ books, setBooks }) => {
           />
           <ul
             className={`absolute cursor-pointer z-20 max-h-[400px] overflow-auto bg-slate-200 rounded  text-left ${
-              oneriler.length !== 0 || showOneri ? "block" : "hidden"
+              showOneri ? "block" : "hidden"
             }`}
           >
             {oneriler.map((book, index) => {
@@ -93,9 +105,13 @@ const Main = ({ books, setBooks }) => {
                 : "Yazar Bilinmiyor";
               const publisherText = publisher || "Yayınevi Bilinmiyor";
               return (
-                <li key={index} 
-                onClick={() => {navigate(`/book/${book.id}`);
-                                setShowOneri(false)}}>
+                <li
+                  key={index}
+                  onClick={() => {
+                    navigate(`/book/${book.id}`);
+                    setShowOneri(false);
+                  }}
+                >
                   <div>
                     <strong>{title}</strong> - {authorsText} - {publisherText}
                   </div>
@@ -107,7 +123,10 @@ const Main = ({ books, setBooks }) => {
 
         <button
           className="bg-gray-300 rounded w-12 text-blue-50"
-          onClick={handleSubmit}
+          onClick={() => {
+            handleSubmit();
+            setShowOneri(false);
+          }}
           type="button"
         >
           Ara

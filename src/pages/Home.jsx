@@ -5,14 +5,14 @@ import FooterBook from "../components/FooterBook";
 import { useState } from "react";
 import BookList from "./BookList";
 
-const Home = () => {
+const Home = ({sepet, setSepet}) => {
   const [books, setBooks] = useState([]);
   const [oneriler, setOneriler] = useState([]);
 
   return (
     <div className="bg-blue-400 ">
       <Main book={books} setBooks={setBooks} oneriler={oneriler} setOneriler={setOneriler} />
-      <BookList books={books} setBook={setBooks} oneriler={oneriler} />
+      <BookList books={books} setBook={setBooks} oneriler={oneriler} sepet={sepet} setSepet={setSepet} />
     </div>
   );
 };
