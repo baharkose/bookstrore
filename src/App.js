@@ -19,7 +19,7 @@ function App() {
   const [odemeTutar, setOdemeTutar] = useState(0);
   return (
     <div className="App">
-      <HesaplaContext.Provider value={{odemeTutar, setOdemeTutar}}>
+      <HesaplaContext.Provider value={{odemeTutar, setOdemeTutar, setSepet, sepet}}>
         <BrowserRouter>
           <NavbarBook />
           <Routes>
@@ -45,8 +45,6 @@ function App() {
               path="/booklist"
               element={
                 <BookList
-                  sepet={sepet}
-                  setSepet={setSepet}
                 />
               }
             />
@@ -54,7 +52,6 @@ function App() {
               path="/buy"
               element={
                 <Buy
-                  sepet={sepet}
                 />
               }
             />
@@ -63,7 +60,7 @@ function App() {
               element={<BookDetails setIsAuthenticated={setIsAuthenticated} />}
             />
             <Route path="/login" element={<Login />} />
-            
+
           </Routes>
           <FooterBook />
         </BrowserRouter>

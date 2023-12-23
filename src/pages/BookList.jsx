@@ -6,11 +6,11 @@ import ShowModal from "../components/ShowModal";
 import { useContext } from "react";
 import { HesaplaContext } from "../context/HesaplaContext";
 
-const BookList = ({ books, sepet, setSepet }) => {
+const BookList = ({ books}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
-  const {odemeTutar, setOdemeTutar} =  useContext(HesaplaContext)
+  const {odemeTutar, setOdemeTutar ,sepet, setSepet} =  useContext(HesaplaContext)
 
   //- modalShow
   // Her kitap için ayrı bir modal durumu tutmak için bir state nesnesi

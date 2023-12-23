@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { HesaplaContext } from "../context/HesaplaContext";
+import { MdDelete } from "react-icons/md";
 
-const ShowModal = ({
-  showModal,
-  setShowModal,
-  sepet,
-}) => {
-
-  const {odemeTutar, setOdemeTutar} =  useContext(HesaplaContext)
+const ShowModal = ({ showModal, setShowModal, sepet }) => {
+  const { odemeTutar, setOdemeTutar, setSepet } = useContext(HesaplaContext);
   console.log(sepet);
+
+  const miktarGuncelle = (id, yeniMiktar) => {
+    const guncellenmisSepet = sepet.map((item) => {
+      if (item.id == id) {
+        return { ...item, miktar: yeniMiktar };
+      }
+      return item;
+    });
+    setSepet(guncellenmisSepet);
+  };
 
   useEffect(() => {
     // Sepetin bir array olduğundan ve eleman içerdiğinden emin ol
@@ -23,7 +29,7 @@ const ShowModal = ({
       // Sepet boş veya undefined ise ödeme tutarı sıfırlanır
       setOdemeTutar(0);
     }
-  }, [sepet]);
+  }, [sepet, setOdemeTutar]);
 
   return (
     <div>
@@ -78,7 +84,7 @@ const ShowModal = ({
                             <td className="border-b border-gray-200 bg-white text-sm">
                               <div className="flex items-center">
                                 <div className="ml-3">
-                                  <p className="text-gray-900 whitespace-no-wrap">
+                                  <p className="text-gray-900 whitespace-no-wrap font-bold">
                                     {ad}
                                   </p>
                                 </div>
@@ -86,15 +92,23 @@ const ShowModal = ({
                             </td>
                             <td className="px-1 py-1 border-b border-gray-200 bg-white text-sm">
                               <div className="flex items-center justify-start">
-                                <button className="text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 rounded-full bg-gray-200 hover:bg-gray-300 p-1">
+                                <button
+                                  className="text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 rounded-full bg-gray-200 hover:bg-gray-300 px-[11px] py-1 cursor-pointer"
+                                  onClick={() =>
+                                    miktarGuncelle(id, Math.max(1, miktar - 1))
+                                  }
+                                >
                                   -
                                 </button>
                                 <input
                                   type="text"
                                   className="mx-2 border text-center w-8"
-                                  defaultValue={miktar}
+                                  value={miktar}
                                 />
-                                <button className="text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 rounded-full bg-gray-200 hover:bg-gray-300 p-1">
+                                <button
+                                  className="text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200 rounded-full bg-gray-200 hover:bg-gray-300 px-[9px] py-1 cursor-pointer"
+                                  onClick={() => miktarGuncelle(id, miktar + 1)}
+                                >
                                   +
                                 </button>
                               </div>
@@ -113,7 +127,7 @@ const ShowModal = ({
                             </td>
                             <td className="px-1 py-1 border-b border-gray-200 bg-white text-sm">
                               <button className="text-red-500 hover:text-red-700">
-                                <i className="fas fa-times"></i>
+                              <MdDelete />
                               </button>
                             </td>
                           </tr>
