@@ -18,7 +18,7 @@ function App() {
   const [sepet, setSepet] = useState([]);
   const [odemeTutar, setOdemeTutar] = useState(0);
   return (
-    <div className="App">
+    <div className="App container">
       <HesaplaContext.Provider value={{odemeTutar, setOdemeTutar, setSepet, sepet}}>
         <BrowserRouter>
           <NavbarBook />

@@ -3,7 +3,7 @@ import back from "../img/slider/anasayfa.png"
 
 export function FooterBook() {
   return (
-    <footer className="footer flex w-full flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 border-t border-blue-gray-50 py-6 text-center md:justify-between bg-black text-white my-0">
+    <footer className="footer flex w-full flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 border-t border-blue-gray-50 py-6 text-center md:justify-between bg-black text-white my-0 px-5">
       <Typography color="blue-gray" className="font-normal">
         &copy; 2023 Bahar 
       </Typography>

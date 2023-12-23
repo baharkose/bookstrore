@@ -81,8 +81,8 @@ const Main = ({ books, setBooks, sepet, setSepet }) => {
     );
   } else {
     return (
-      <div className="text-center d-flex justify-center py-4 mt-[9rem]">
-        <div className="input relative ">
+      <div className="text-center d-flex justify-center">
+        <div className="input relative">
           <h1 className="header mb-4">BOOK STORE</h1>
           <input
             type="text"

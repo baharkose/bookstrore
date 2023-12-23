@@ -9,6 +9,13 @@
   box-sizing: border-box;
 }
 
+.container {
+    min-height: 100vh; /* Viewport'un tamamını kapsayacak şekilde ayarlayın */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* İçerik ve footer arasında boşluk bırakın */
+  }
+
 /* font-family: 'Inter Tight', sans-serif; */
 
 body {
@@ -18,8 +25,8 @@ body {
 }
 
 .home {
-    position: relative; /* .home sınıfını konumlandırmak için */
-    min-height: 80%; /* Yüksekliği ayarlayın */
+    position: relative; 
+    min-height: 80%; 
   
   
   }
@@ -28,15 +35,26 @@ body {
     font-weight: bolder;
   }
   
-  .footer {
-    position: absolute;
-    bottom: 0;
+  /* Footer için stil ayarlamaları */
+.footer {
     width: 100%;
     background-image: url("../public/img/arkaplan.png");
-    background-size: contain; /* Resmi kapsayacak şekilde ayarlayın */
+    background-size: contain;
     background-repeat: no-repeat;
-    background-position: center bottom; /* Resmi alt ortada sabitleyin */
-   
+    background-position: center bottom;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    
+  }
+
+  /* Kitap listesi ve diğer içerik için stil ayarlamaları */
+.content {
+    /* İçerik alanınız burada */
+    flex: 1; /* Footer'dan önceki içeriği esnek yapın */
   }
 
 a {

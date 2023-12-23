@@ -10,9 +10,9 @@ export default function NavbarBook() {
   const { sepet } = useContext(HesaplaContext);
 
   return (
-    <div className="flex items-center justify-between border-b border-black border-b-2 px-5 mt-4  relative">
+    <div className="flex items-center justify-between border-b border-black border-b-1 px-5 mt-4  relative">
       <Link to="/">
-        <img src={navbarImg} alt="" className="w-40" />
+        <img src={navbarImg} alt="" className="w-80 absolute top-[-17px] left-0" />
         
       </Link>
       <nav>
