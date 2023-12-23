@@ -95,7 +95,7 @@ const Main = ({ books, setBooks, sepet, setSepet }) => {
             }}
           />
           <ul
-            className={`absolute cursor-pointer z-2 w-[500px] overflow-auto bg-slate-200 rounded  text-left ${
+            className={`absolute cursor-pointer z-2 w-[500px] overflow-auto bg-[#f9f9f9] rounded  text-left ${
               showOneri ? "block" : "hidden"
             }`}
           >
