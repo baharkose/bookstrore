@@ -83,7 +83,7 @@ const Main = ({ books, setBooks, sepet, setSepet }) => {
           <input
             type="text"
             value={input}
-            className="w-[500px] h-[40px] rounded p-2 border"
+            className="lg:w-[500px] h-[40px] rounded p-2 border sm:w-3/4 md:w-1/2"
             placeholder="kitap adı, yazar veya yayınevi ara"
             onChange={(e) => {
               setInput(e.target.value);
