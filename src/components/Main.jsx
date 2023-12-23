@@ -81,12 +81,13 @@ const Main = ({ books, setBooks, sepet, setSepet }) => {
     );
   } else {
     return (
-      <div className="text-center d-flex justify-center">
-        <div className="input relative">
+      <div className="text-center d-flex justify-center py-4 mt-[9rem]">
+        <div className="input relative ">
+          <h1 className="header mb-4">BOOK STORE</h1>
           <input
             type="text"
             value={input}
-            className="w-[500px] h-[36px] rounded p-2"
+            className="w-[500px] h-[40px] rounded p-2 border"
             placeholder="kitap adı, yazar veya yayınevi ara"
             onChange={(e) => {
               setInput(e.target.value);
@@ -119,10 +120,8 @@ const Main = ({ books, setBooks, sepet, setSepet }) => {
               );
             })}
           </ul>
-        </div>
-
-        <button
-          className="bg-gray-300 rounded w-12 text-blue-50"
+          <button
+          className="bg-gray-300 rounded w-12 h-[40px] text-blue-50"
           onClick={() => {
             handleSubmit();
             setShowOneri(false);
@@ -131,6 +130,9 @@ const Main = ({ books, setBooks, sepet, setSepet }) => {
         >
           Ara
         </button>
+        </div>
+
+      
       </div>
     );
   }

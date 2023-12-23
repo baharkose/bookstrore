@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
 import axios from "axios";
 import myImage from "../img/books.jpg";
 import ShowModal from "../components/ShowModal";
+import { HesaplaContext } from "../context/HesaplaContext";
 
-const BookDetails = ({ setIsAuthenticated }) => {
+
+
+const BookDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  console.log(id);
   const [loading, setLoading] = useState(false);
   const [book, setBook] = useState(null);
-
-  //- modalShow
-  const [showModal, setShowModal] = React.useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const { odemeTutar, setOdemeTutar, setSepet, sepet } = useContext(HesaplaContext);
 
   useEffect(() => {
     const getBookDetails = async () => {
@@ -24,16 +23,16 @@ const BookDetails = ({ setIsAuthenticated }) => {
 
       try {
         const response = await axios.get(url);
-        console.log("API Response:", response.data); // Log the response
         setBook(response.data);
       } catch (error) {
-        console.error("Bir hata oluştu!", error);
+        console.error("Error fetching book details!", error);
       }
       setLoading(false);
     };
 
     getBookDetails();
   }, [id]);
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -44,47 +43,51 @@ const BookDetails = ({ setIsAuthenticated }) => {
 
   const { volumeInfo } = book;
   return (
-    <div>
-      <h1>Book Detail</h1>
-
-      {/* Flex container */}
-      <div className="d-flex justify-content-center align-items-start">
-        {/* Card */}
-        <Card
-          className="mb-4"
-          style={{ flex: "1", marginRight: "20px" }} // Adjust card width and add margin
-        >
-          <Card.Img
-            style={{ height: "16rem", objectFit: "cover" }}
-            variant="top"
-            className="mx-auto d-block"
-            src={volumeInfo?.imageLinks?.thumbnail || myImage}
-          />
-          <Card.Body>
-            <Card.Title>{volumeInfo?.title}</Card.Title>
-            <Card.Text>{volumeInfo?.authors}</Card.Text>
-            <Button
-              className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              type="button"
-              onClick={() => setShowModal(true)}
-            >
-              Sepete Ekle
-            </Button>
-          </Card.Body>
-        </Card>
-
-        {/* Text content */}
-        <div style={{ flex: "2" }}>
-          {" "}
-          {/* Adjust flex value as needed */}
-          {volumeInfo?.description ? (
-            <div dangerouslySetInnerHTML={{ __html: volumeInfo.description }} />
-          ) : (
-            "No description available."
-          )}
+    <div className="container mx-auto p-4 w-10/12 bg-green-100 font-montserrat">
+      <h1 className="text-2xl font-bold mb-4 text-green-700">Book Detail</h1>
+      <div className="flex flex-wrap -mx-2">
+        <div className="w-full sm:w-1/2 p-2">
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <img
+              className="w-full h-64 object-cover object-center"
+              src={volumeInfo?.imageLinks?.thumbnail || myImage}
+              alt="Book cover"
+            />
+            <div className="p-4">
+              <h2 className="text-xl font-bold mb-2 text-green-800">{volumeInfo?.title}</h2>
+              <p className="text-gray-700">{volumeInfo?.authors?.join(", ")}</p>
+              <p className="text-green-700">
+                <span className="font-bold">Price: </span>{" "}
+                {Math.floor(Math.random() * (25 - 5 + 1) + 5) * 10}
+                <span>₺</span>
+              </p>
+              <button
+                className="mt-4 bg-white text-green-600 border border-green-600 hover:bg-green-600 hover:text-white active:bg-green-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg focus:outline-none ease-linear transition-all duration-150"
+                onClick={() => setShowModal(true)}
+              >
+                Add to Cart
+              </button>
+              {showModal && (
+                <ShowModal
+                  showModal={showModal}
+                  setShowModal={setShowModal}
+                  sepet={sepet}
+                />
+              )}
+            </div>
+          </div>
         </div>
-
-        <ShowModal showModal={showModal} setShowModal={setShowModal} />
+        <div className="w-full sm:w-1/2 p-2">
+          <div className="bg-white shadow-lg rounded-lg p-4">
+            {volumeInfo?.description ? (
+              <div
+                dangerouslySetInnerHTML={{ __html: volumeInfo.description }}
+              />
+            ) : (
+              "No description available."
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

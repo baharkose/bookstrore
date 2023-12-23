@@ -10,7 +10,7 @@ const Home = ({sepet, setSepet}) => {
   const [oneriler, setOneriler] = useState([]);
 
   return (
-    <div className="bg-blue-400 ">
+    <div className="text-center m-auto home">
       <Main book={books} setBooks={setBooks} oneriler={oneriler} setOneriler={setOneriler} />
       <BookList books={books} setBook={setBooks} oneriler={oneriler} sepet={sepet} setSepet={setSepet} />
     </div>

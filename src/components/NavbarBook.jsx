@@ -1,17 +1,19 @@
 import { useContext, useState } from "react"; // import state
 import { Link } from "react-router-dom";
 import { HesaplaContext } from "../context/HesaplaContext";
-
+import { GiDaisy } from "react-icons/gi";
+import navbarImg from "../img/slider/navbar.png"
 
 export default function NavbarBook() {
   const [isNavOpen, setIsNavOpen] = useState(false); // initiate isNavOpen state with false
   const [isOpen, setIsOpen] = useState(false);
-  const {sepet} = useContext(HesaplaContext)
+  const { sepet } = useContext(HesaplaContext);
 
   return (
-    <div className="flex items-center justify-between border-b border-gray-400 py-8 px-5">
+    <div className="flex items-center justify-between border-b border-black border-b-2 px-5 mt-4  relative">
       <Link to="/">
-        Kitaplık
+        <img src={navbarImg} alt="" className="w-40" />
+        
       </Link>
       <nav>
         <section className="MOBILE-MENU flex lg:hidden">
@@ -43,22 +45,14 @@ export default function NavbarBook() {
               </svg>
             </div>
             <ul className="MENU-LINK-MOBILE-OPEN flex flex-col items-center justify-between">
-              <li className="border-b border-gray-400 my-8 uppercase">
-                <Link to="/about">Home</Link>
+              <li className="border-b border-gray-400  uppercase">
+                <Link to="/">Home</Link>
               </li>
-              <li className="border-b border-gray-400 my-8 uppercase">
-                <Link to="/about">About</Link>
-              </li>
-              <li className="border-b border-gray-400 my-8 uppercase">
-                <Link to="/portfolio">Portfolio</Link>
-              </li>
-              <li className="border-b border-gray-400 my-8 uppercase">
-                <Link to="/contact">Contact</Link>
-              </li>
+            
               <li className="border-b border-gray-400 my-8 uppercase">
                 <Link to="/buy">
                   <button
-                    class="py-4 px-1 relative border-2 border-transparent text-gray-800 rounded-full hover:text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out"
+                    class=" px-1 relative border-2 border-transparent text-gray-800 rounded-full hover:text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out"
                     aria-label="Cart"
                   >
                     <svg
@@ -74,7 +68,7 @@ export default function NavbarBook() {
                     </svg>
                     <span class="absolute inset-0 object-right-top -mr-6">
                       <div class="inline-flex items-center px-1.5 py-0.5 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-red-500 text-white">
-                      {sepet.length}
+                        {sepet.length}
                       </div>
                     </span>
                   </button>
@@ -86,17 +80,9 @@ export default function NavbarBook() {
 
         <ul className="DESKTOP-MENU hidden space-x-8 lg:flex">
           <li>
-            <Link to="/main">Main</Link>
+            <Link to="/">Main</Link>
           </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/portfolio">Portfolio</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
+         
           <li>
             <Link to="/Buy">
               <button
@@ -116,7 +102,7 @@ export default function NavbarBook() {
                 </svg>
                 <span class="absolute inset-0 object-right-top -mr-6 top-[-12px]">
                   <div class="inline-flex items-center px-1.5 py-0.5 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-red-500 text-white">
-                  {sepet.length}
+                    {sepet.length}
                   </div>
                 </span>
               </button>
